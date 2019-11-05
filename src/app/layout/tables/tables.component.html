@@ -1,0 +1,60 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Tables'" [icon]="'fa-table'"></app-page-header>
+
+    <div class="row">
+        <div class=".col-xl-12">
+            <div *ngIf="!reservar" class="card ">
+                <div class="card-header">
+                    Vuelos Disponibles
+                </div>
+                <div class="card-body table-responsive">
+                    <div *ngIf="ResponseVuelos;else No_Vuelos">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Fecha Vuelo</th>
+                                    <th>Valor Vuelo</th>
+                                    <th>Reservar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let item of ResponseVuelos">
+
+                                    <td>{{item.nombreOrigen}}</td>
+                                    <td>{{item.nombreDestino}}</td>
+                                    <td>{{item.horaVuelo}}</td>
+                                    <td>{{item.precio}}</td>
+                                    <td><button on-click="clickReservar(item)" _ngcontent-axj-c12=""
+                                            class="btn btn-info btn-sm">Reservar</button></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <ng-template #No_Vuelos>
+                        <h3>No Existen Vuelos Disponibles.</h3>
+                    </ng-template>
+
+
+                </div>
+
+            </div>
+            <form>
+                <div *ngIf="reservar">
+
+                    <h3>Ingrese su fecha de nacimiento.</h3>
+                    <input name="FechaNaciomiento" type="date" [(ngModel)]="FNacimiento" />
+                    <h3>Ingrese su numero de cedula.</h3>
+                    <input name="Cedula" type="number" [(ngModel)]="NCedula" />
+                    <button on-click="Reservar()" _ngcontent-axj-c12="" class="btn btn-info btn-sm">Guardar
+                        Reserva</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
